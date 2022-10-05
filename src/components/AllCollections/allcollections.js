@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 import styles from "./styles.module.css";
+import { v4 as uuidv4 } from "uuid";
 
-function MyCollection() {
+function AllCollections() {
   const [isLoading, setIsLoading] = useState(true);
   const [coll, setColl] = useState();
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function MyCollection() {
     async function fetchColl() {
       try {
         setIsLoading(true);
-        const response = await api.get("/collections/my-collections");
+        const response = await api.get("/collections/collections");
         setColl(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -22,6 +23,8 @@ function MyCollection() {
     fetchColl();
   }, []);
 
+  console.log(coll);
+
   return (
     <div>
       <h1>YOUR COLLECTIONS</h1>
@@ -30,7 +33,7 @@ function MyCollection() {
           return (
             <div
               className={styles.card}
-              key={oneColl._id}
+              key={uuidv4()}
               onClick={() => {
                 navigate(`/collection-detail/${oneColl._id}`);
               }}
@@ -42,7 +45,7 @@ function MyCollection() {
                 <p>{oneColl.collectionDetails}</p>
                 {oneColl.photos.map((photo) => {
                   return (
-                    <div key={photo._id}>
+                    <div key={uuidv4()}>
                       <img src={photo.photoUrl} alt="Avatar" width={300} />
                     </div>
                   );
@@ -55,4 +58,4 @@ function MyCollection() {
   );
 }
 
-export default MyCollection;
+export default AllCollections;

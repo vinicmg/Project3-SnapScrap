@@ -9,7 +9,7 @@ function SnapNavbar() {
 
   function handleLogOut(e) {
     localStorage.removeItem("loggedUser");
-    navigate("/");
+    navigate("/login");
   }
 
   return (

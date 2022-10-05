@@ -2,7 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { api } from "../../api/api";
 import { AuthContext } from "../../contexts/authContext";
 
-function CreateCollection({ toggleCollection, setToggleCollection }) {
+function CreateCollection({
+  toggleCollection,
+  setToggleCollection,
+  reload,
+  setReload,
+}) {
   const { loggedUser } = useContext(AuthContext);
   const user = loggedUser.user._id;
   const [img, setImg] = useState("");
@@ -61,6 +66,7 @@ function CreateCollection({ toggleCollection, setToggleCollection }) {
       await api.post(`/photos/create/${collectionId}`, { photoUrl: imgURL });
 
       setToggleCollection(!toggleCollection);
+      setReload(!reload);
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +92,7 @@ function CreateCollection({ toggleCollection, setToggleCollection }) {
           onChange={handleChange}
         />
         <input type="file" onChange={handleImage} />
+        {img && <img src={preview} alt="" width={200} />}
         <button type="submit">Enter</button>
         <button
           onClick={() => {

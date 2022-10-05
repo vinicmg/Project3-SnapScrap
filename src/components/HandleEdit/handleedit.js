@@ -12,8 +12,9 @@ function HandleEdit({ user, reload, setReload, setToggleEdit, toggleEdit }) {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const response = await api.put("/users/edit-user", { ...editUser });
-      console.log(response);
+      await api.put;
+      await api.put("/users/edit-user", { ...editUser });
+
       setReload(!reload);
       setToggleEdit(!toggleEdit);
     } catch (error) {
@@ -25,11 +26,11 @@ function HandleEdit({ user, reload, setReload, setToggleEdit, toggleEdit }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="profilePicture">Profile Picture: </label>
+        <label htmlFor="name">Name: </label>
         <input
-          id="profilePicture"
-          name="profilePicture"
-          value={editUser.profilePicture}
+          id="name"
+          name="name"
+          value={editUser.name}
           onChange={handleChange}
         />
 

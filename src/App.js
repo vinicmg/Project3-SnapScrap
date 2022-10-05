@@ -4,6 +4,8 @@ import { AuthContextComponent } from "./contexts/authContext";
 import HomePage from "./pages/homePage";
 import LoginPage from "./pages/loginPage";
 import ProfilePage from "./pages/profilePage";
+import CollectionsDetail from "./pages/collectionsDetail.page";
+import "./App.css";
 
 function App() {
   return (
@@ -14,6 +16,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route
+            path="/collection-detail/:collectionId"
+            element={<CollectionsDetail />}
+          />
         </Routes>
       </AuthContextComponent>
     </div>

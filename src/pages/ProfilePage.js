@@ -1,10 +1,9 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api/api";
 import CreateCollection from "../components/CreateCollection/createcollection";
 import HandleEdit from "../components/HandleEdit/handleedit";
-import MyCollection from "../components/MyCollection";
-import SnapNavbar from "../components/SnapNavbar/navbar";
+import MyCollection from "../components/MyCollection/mycollection";
 
 export function ProfilePage() {
   const [user, setUser] = useState({
@@ -16,6 +15,7 @@ export function ProfilePage() {
     followers: [],
     following: [],
   });
+
   const [isLoading, setIsLoading] = useState(true);
   const [reload, setReload] = useState(false);
   const [toggleEdit, setToggleEdit] = useState(true);
@@ -32,16 +32,14 @@ export function ProfilePage() {
 
     fetchUser();
   }, [reload]);
-  console.log(user);
+
   return (
     <div>
       <img src={user.profilePicture} alt="profile" />
       <div>
-        <h1>Welcome! {user.email}</h1>
-        {user.name ? <>{user.name}</> : <></>}
-        {user.userName ? <p>{user.userName}</p> : <></>}
+        <h1>Welcome, {user.name ? <>{user.name}!</> : <>{user.email}.</>}</h1>
+        {user.userName ? <p>@{user.userName}</p> : <></>}
 
-        <SnapNavbar />
         <button
           onClick={() => {
             setToggleEdit(!toggleEdit);
@@ -70,6 +68,8 @@ export function ProfilePage() {
           <CreateCollection
             toggleCollection={toggleCollection}
             setToggleCollection={setToggleCollection}
+            reload={reload}
+            setReload={setReload}
           />
         )}
       </div>

@@ -10,6 +10,8 @@ function LoginPage() {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const { setLoggedUser } = useContext(AuthContext);
@@ -17,7 +19,7 @@ function LoginPage() {
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
-  console.log(form);
+
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -32,23 +34,50 @@ function LoginPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Email:</label>
-      <input
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-      />
-      <label>Password:</label>
-      <input
-        type="password"
-        name="password"
-        value={form.password}
-        onChange={handleChange}
-      />
-      <button type="submit">Enter</button>
-    </form>
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+        />
+
+        {!showPassword ? (
+          <>
+            <label>Password:</label>
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+            />
+          </>
+        ) : (
+          <>
+            <label>Password:</label>
+            <input
+              type="text"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+            />
+          </>
+        )}
+
+        <spam>
+          {"👀"}
+
+          <input
+            type="checkbox"
+            onChange={() => setShowPassword(!showPassword)}
+          />
+        </spam>
+        <button type="submit">Enter</button>
+      </form>
+    </div>
   );
 }
 
