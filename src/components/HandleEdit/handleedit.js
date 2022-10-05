@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { api } from "../../api/api";
+import HandleDelete from "../HandleDelete/handledelete";
 
-function HandleEdit({ user, reload, setReload }) {
+function HandleEdit({ user, reload, setReload, setToggleEdit, toggleEdit }) {
   const [editUser, setEditUser] = useState({ ...user });
 
   function handleChange(e) {
@@ -14,6 +15,7 @@ function HandleEdit({ user, reload, setReload }) {
       const response = await api.put("/users/edit-user", { ...editUser });
       console.log(response);
       setReload(!reload);
+      setToggleEdit(!toggleEdit);
     } catch (error) {
       console.log(error);
     }
@@ -39,8 +41,8 @@ function HandleEdit({ user, reload, setReload }) {
           onChange={handleChange}
         />
         <button type="submit">Save</button>
+        <HandleDelete />
       </form>
-    
     </div>
   );
 }

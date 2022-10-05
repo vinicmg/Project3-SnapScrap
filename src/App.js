@@ -1,9 +1,9 @@
 import { Toaster } from "react-hot-toast";
 import { Routes, Route } from "react-router-dom";
 import { AuthContextComponent } from "./contexts/authContext";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import ProfilePage from "./pages/ProfilePage";
+import HomePage from "./pages/homePage";
+import LoginPage from "./pages/loginPage";
+import ProfilePage from "./pages/profilePage";
 
 function App() {
   return (

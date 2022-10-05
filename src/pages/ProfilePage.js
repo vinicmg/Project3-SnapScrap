@@ -1,8 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api/api";
-import HandleDelete from "../components/HandleDelete/handledelete";
+import CreateCollection from "../components/CreateCollection/createcollection";
 import HandleEdit from "../components/HandleEdit/handleedit";
+import MyCollection from "../components/MyCollection";
 import SnapNavbar from "../components/SnapNavbar/navbar";
 
 export function ProfilePage() {
@@ -16,8 +17,9 @@ export function ProfilePage() {
     following: [],
   });
   const [isLoading, setIsLoading] = useState(true);
-  const [isFilled, setIsFilled] = useState(true);
   const [reload, setReload] = useState(false);
+  const [toggleEdit, setToggleEdit] = useState(true);
+  const [toggleCollection, setToggleCollection] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,15 +38,42 @@ export function ProfilePage() {
       <img src={user.profilePicture} alt="profile" />
       <div>
         <h1>Welcome! {user.email}</h1>
-        {user.name ? <h1>{user.name}</h1> : <></>}
+        {user.name ? <>{user.name}</> : <></>}
         {user.userName ? <p>{user.userName}</p> : <></>}
 
-        {!isLoading && (
-          <HandleEdit user={user} setReload={setReload} reload={reload} />
-        )}
-        <HandleDelete />
         <SnapNavbar />
+        <button
+          onClick={() => {
+            setToggleEdit(!toggleEdit);
+          }}
+        >
+          Edit
+        </button>
+        {!toggleEdit && (
+          <HandleEdit
+            user={user}
+            setReload={setReload}
+            reload={reload}
+            setToggleEdit={setToggleEdit}
+            toggleEdit={toggleEdit}
+          />
+        )}
+
+        <button
+          onClick={() => {
+            setToggleCollection(!toggleCollection);
+          }}
+        >
+          Create Collection
+        </button>
+        {!toggleCollection && (
+          <CreateCollection
+            toggleCollection={toggleCollection}
+            setToggleCollection={setToggleCollection}
+          />
+        )}
       </div>
+      <MyCollection />
     </div>
   );
 }

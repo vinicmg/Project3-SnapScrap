@@ -18,7 +18,7 @@ function LoginPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
   console.log(form);
-  async function handleSumit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     try {
       const response = await api.post("/users/login", form);
@@ -32,7 +32,7 @@ function LoginPage() {
   }
 
   return (
-    <form onSubmit={handleSumit}>
+    <form onSubmit={handleSubmit}>
       <label>Email:</label>
       <input
         type="email"
