@@ -68,7 +68,6 @@ function LoginPage() {
         )}
 
         {"👀"}
-
         <input
           type="checkbox"
           onChange={() => setShowPassword(!showPassword)}

@@ -33,8 +33,6 @@ export function ProfilePage() {
     fetchUser();
   }, [reload]);
 
-  console.log("reload do profile", reload);
-
   return (
     <div>
       <img src={user.profilePicture} alt="profile" width={100} />

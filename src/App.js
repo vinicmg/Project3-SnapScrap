@@ -4,11 +4,11 @@ import { AuthContextComponent } from "./contexts/authContext";
 import HomePage from "./pages/homePage.js";
 import LoginPage from "./pages/loginPage.js";
 import ProfilePage from "./pages/profilePage.js";
-import CollectionsDetail from "./pages/collectionsDetail";
 import "./App.css";
 import SnapNavbar from "./components/SnapNavbar/navbar";
-import UsersDetailPage from "./pages/usersDetail.js";
 import UsersPage from "./pages/usersPage.js";
+import UsersDetailPage from "./pages/usersDetail";
+import CollectionsDetail from "./pages/collectionsDetail";
 
 function App() {
   return (
@@ -20,12 +20,13 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/users/:userdId" element={<UsersDetailPage />} />
           <Route path="/users" element={<UsersPage />} />
+          <Route path="/users/:userId" element={<UsersDetailPage />} />
           <Route
             path="/collection-detail/:collectionId"
             element={<CollectionsDetail />}
           />
+          {/* <Route path="/collection/:collectionId" element={}/> */}
         </Routes>
       </AuthContextComponent>
     </div>
