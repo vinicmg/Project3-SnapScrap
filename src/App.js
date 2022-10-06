@@ -1,16 +1,17 @@
 import { Toaster } from "react-hot-toast";
 import { Routes, Route } from "react-router-dom";
 import { AuthContextComponent } from "./contexts/authContext";
-import HomePage from "./pages/homePage";
-import LoginPage from "./pages/loginPage";
-import ProfilePage from "./pages/profilePage";
+import HomePage from "./pages/homePage.js";
+import LoginPage from "./pages/loginPage.js";
+import ProfilePage from "./pages/profilePage.js";
 import CollectionsDetail from "./pages/collectionsDetail.page";
 import "./App.css";
 import SnapNavbar from "./components/SnapNavbar/navbar";
-import UsersDetailPage from "./pages/usersDetail.page";
-import UsersPage from "./pages/usersPage";
+import UsersDetailPage from "./pages/usersDetail.page.js";
+import UsersPage from "./pages/usersPage.js";
 
 function App() {
+  console.log(HomePage);
   return (
     <div className="App">
       <Toaster />
