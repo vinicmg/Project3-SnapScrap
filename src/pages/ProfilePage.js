@@ -33,6 +33,8 @@ export function ProfilePage() {
     fetchUser();
   }, [reload]);
 
+  console.log("reload do profile", reload);
+
   return (
     <div>
       <img src={user.profilePicture} alt="profile" width={100} />
@@ -73,7 +75,7 @@ export function ProfilePage() {
           />
         )}
       </div>
-      <MyCollection />
+      <MyCollection reload={reload} setReload={setReload} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 import styles from "./styles.module.css";
 
-function MyCollection() {
+function MyCollection({ reload, setReload }) {
   const [isLoading, setIsLoading] = useState(true);
   const [coll, setColl] = useState();
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function MyCollection() {
       }
     }
     fetchColl();
-  }, []);
+  }, [reload]);
 
   return (
     <div>

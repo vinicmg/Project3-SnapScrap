@@ -21,6 +21,8 @@ function CreateCollection({
     likes: [],
   });
 
+  console.log(reload);
+
   function handleChange(e) {
     setNewCol({ ...newCol, [e.target.name]: e.target.value });
   }
@@ -64,9 +66,9 @@ function CreateCollection({
       const collectionId = response.data._id;
 
       await api.post(`/photos/create/${collectionId}`, { photoUrl: imgURL });
+      setReload(!reload);
 
       setToggleCollection(!toggleCollection);
-      setReload(!reload);
     } catch (error) {
       console.log(error);
     }

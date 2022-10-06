@@ -23,7 +23,7 @@ function App() {
           <Route path="/users/:userdId" element={<UsersDetailPage />} />
           <Route path="/users" element={<UsersPage />} />
           <Route
-            path="/collections/:collectionId"
+            path="/collection-detail/:collectionId"
             element={<CollectionsDetail />}
           />
         </Routes>

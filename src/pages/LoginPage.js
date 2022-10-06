@@ -67,14 +67,13 @@ function LoginPage() {
           </>
         )}
 
-        <spam>
-          {"👀"}
+        {"👀"}
 
-          <input
-            type="checkbox"
-            onChange={() => setShowPassword(!showPassword)}
-          />
-        </spam>
+        <input
+          type="checkbox"
+          onChange={() => setShowPassword(!showPassword)}
+        />
+
         <button type="submit">Enter</button>
       </form>
     </div>
