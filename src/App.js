@@ -4,14 +4,13 @@ import { AuthContextComponent } from "./contexts/authContext";
 import HomePage from "./pages/homePage.js";
 import LoginPage from "./pages/loginPage.js";
 import ProfilePage from "./pages/profilePage.js";
-import CollectionsDetail from "./pages/collectionsDetail.page";
+import CollectionsDetail from "./pages/collectionsDetail";
 import "./App.css";
 import SnapNavbar from "./components/SnapNavbar/navbar";
-import UsersDetailPage from "./pages/usersDetail.page.js";
+import UsersDetailPage from "./pages/usersDetail.js";
 import UsersPage from "./pages/usersPage.js";
 
 function App() {
-  console.log(HomePage);
   return (
     <div className="App">
       <Toaster />
