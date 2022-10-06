@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "dev": "nodemon start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && acho '/* /index.html 200' | cat >build/_redirects",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
