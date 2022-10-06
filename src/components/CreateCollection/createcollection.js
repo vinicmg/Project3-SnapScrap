@@ -44,7 +44,7 @@ function CreateCollection({
   async function handleUpload() {
     try {
       const uploadData = new FormData();
-      uploadData.append("images", img);
+      uploadData.append("picture", img);
 
       const response = await api.post("/upload-image", uploadData);
 

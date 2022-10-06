@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../api/api";
+import HandleEditCollection from "../components/HandleEditCollection/handleEditCollection";
+import { AuthContext } from "../contexts/authContext";
+
 
 function CollectionsDetail() {
   const [isLoading, setIsLoading] = useState(true);
@@ -10,6 +13,7 @@ function CollectionsDetail() {
   const [preview, setPreview] = useState();
   const [togglePhoto, setTogglePhoto] = useState(true);
   const [reload, setReload] = useState(false);
+  const { loggedUser } = useContext(AuthContext);
 
   const { collectionId } = useParams();
 
@@ -45,7 +49,6 @@ function CollectionsDetail() {
     return () => URL.revokeObjectURL(objectURL);
   }, [img]);
 
-  console.log(img);
   async function handleUpload() {
     try {
       const uploadData = new FormData();
@@ -75,8 +78,8 @@ function CollectionsDetail() {
 
   async function handleDeletePhoto(photo) {
     try {
-      console.log(photo);
       await api.delete(`/photos/delete/${photo}`);
+      setReload(!reload);
     } catch (error) {
       console.log(error);
     }
@@ -94,40 +97,64 @@ function CollectionsDetail() {
           >
             Back
           </button>
-
-          {!togglePhoto ? (
-            <form onSubmit={handleSubmit}>
-              <input type="file" onChange={handleImage} />
-              {img && <img src={preview} alt="Avatar" width={200} />}
-              <button type="submit">Enter</button>
-              <button
-                onClick={() => {
-                  setTogglePhoto(!togglePhoto);
-                }}
-              >
-                Cancel
-              </button>
-            </form>
-          ) : (
-            <button
-              onClick={() => {
-                setTogglePhoto(!togglePhoto);
-              }}
-            >
-              Add Foto
-            </button>
+          {coll.author._id === loggedUser.user._id && (
+            <HandleEditCollection
+              collectionId={collectionId}
+              reload={reload}
+              setReload={setReload}
+            />
           )}
+
+          {coll.author._id === loggedUser.user._id && (
+            <>
+              {!togglePhoto ? (
+                <form onSubmit={handleSubmit}>
+                  <input type="file" onChange={handleImage} />
+                  {img && <img src={preview} alt="Avatar" width={200} />}
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      setTogglePhoto(!togglePhoto);
+                    }}
+                  >
+                    Enter
+                  </button>
+                  <button
+                    onClick={() => {
+                      setTogglePhoto(!togglePhoto);
+                    }}
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                </form>
+              ) : (
+                <button
+                  onClick={() => {
+                    setTogglePhoto(!togglePhoto);
+                  }}
+                  type="button"
+                >
+                  Add Foto
+                </button>
+              )}
+            </>
+          )}
+
           <div className="card">
             {coll.photos.map((photo) => {
               return (
                 <div key={photo._id} className="btnDivShow">
                   <img src={photo.photoUrl} alt="Avatar" width={300} />
-                  <button
-                    className="btnHidden"
-                    onClick={() => handleDeletePhoto(photo._id)}
-                  >
-                    delete
-                  </button>
+                  {coll.author._id === loggedUser.user._id && (
+                    <button
+                      className="btnHidden"
+                      onClick={() => handleDeletePhoto(photo._id)}
+                      type="button"
+                    >
+                      delete
+                    </button>
+                  )}
                 </div>
               );
             })}

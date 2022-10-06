@@ -35,7 +35,7 @@ export function ProfilePage() {
 
   return (
     <div>
-      <img src={user.profilePicture} alt="profile" />
+      <img src={user.profilePicture} alt="profile" width={100} />
       <div>
         <h1>Welcome, {user.name ? <>{user.name}!</> : <>{user.email}.</>}</h1>
         {user.userName ? <p>@{user.userName}</p> : <></>}

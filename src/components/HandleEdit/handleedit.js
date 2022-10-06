@@ -12,7 +12,6 @@ function HandleEdit({ user, reload, setReload, setToggleEdit, toggleEdit }) {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await api.put;
       await api.put("/users/edit-user", { ...editUser });
 
       setReload(!reload);

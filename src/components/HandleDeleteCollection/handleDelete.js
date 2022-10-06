@@ -1,16 +1,13 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
-import { AuthContext } from "../../contexts/authContext";
 
-function HandleDelete() {
-  const { loggedUser } = useContext(AuthContext);
+function HandleDeleteCollection({ collectionId }) {
   const navigate = useNavigate();
 
   async function handleDelete() {
     try {
-      await api.delete(`/users/delete/${loggedUser.user._id}`);
-      navigate("/");
+      await api.delete(`/collections/delete/${collectionId}`);
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }
@@ -19,10 +16,10 @@ function HandleDelete() {
   return (
     <>
       <button onClick={handleDelete} type="button">
-        Delete Account
+        Delete Collection
       </button>
     </>
   );
 }
 
-export default HandleDelete;
+export default HandleDeleteCollection;

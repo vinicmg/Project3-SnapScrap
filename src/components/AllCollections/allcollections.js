@@ -23,8 +23,6 @@ function AllCollections() {
     fetchColl();
   }, []);
 
-  console.log(coll);
-
   return (
     <div>
       <h1>YOUR COLLECTIONS</h1>
