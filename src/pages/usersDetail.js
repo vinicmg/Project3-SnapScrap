@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 function UsersDetailPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState({});
-  const [refresh, setRefresh] = useState(false);
 
   const { userId } = useParams();
 
@@ -35,15 +34,15 @@ function UsersDetailPage() {
           </div>
           {user.name ? <p>{user.name}</p> : <p>{user.email}</p>}
           {user.userName ? <p>@{user.userName}</p> : null}
-            {user.collections.map((coll) => {
-              console.log(coll);
-              return (
-                <Link to={`/collection-detail/${coll._id}`} key={uuidv4()}>
-                  <p>Collection Name: {coll.collectionName}</p>
-                  <p>Collection Detail: {coll.collectionDetails}</p>
-                </Link>
-              );
-            })}
+          {user.collections.map((coll) => {
+            console.log(coll);
+            return (
+              <Link to={`/collection-detail/${coll._id}`} key={uuidv4()}>
+                <p>Collection Name: {coll.collectionName}</p>
+                <p>Collection Detail: {coll.collectionDetails}</p>
+              </Link>
+            );
+          })}
         </>
       )}
     </div>

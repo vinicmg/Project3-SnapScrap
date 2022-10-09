@@ -4,7 +4,6 @@ import { api } from "../api/api";
 import HandleEditCollection from "../components/HandleEditCollection/handleEditCollection";
 import { AuthContext } from "../contexts/authContext";
 
-
 function CollectionsDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [coll, setColl] = useState();

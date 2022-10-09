@@ -6,9 +6,9 @@ import LoginPage from "./pages/loginPage.js";
 import ProfilePage from "./pages/profilePage.js";
 import "./App.css";
 import SnapNavbar from "./components/SnapNavbar/navbar";
-import UsersPage from "./pages/usersPage.js";
 import UsersDetailPage from "./pages/usersDetail";
 import CollectionsDetail from "./pages/collectionsDetail";
+import UsersPage from "./pages/usersPage";
 
 function App() {
   return (
