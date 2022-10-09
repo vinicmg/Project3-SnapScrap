@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../api/api";
+import { v4 as uuidv4 } from "uuid";
 import CreateCollection from "../components/CreateCollection/createcollection";
 import HandleEdit from "../components/HandleEdit/handleedit";
 import MyCollection from "../components/MyCollection/mycollection";
@@ -64,6 +65,12 @@ export function ProfilePage() {
         >
           Create Collection
         </button>
+        <Link to={'/users/followers'} key={uuidv4()}>
+            Followers              
+        </Link>
+        <Link to={'/users/following'} key={uuidv4()}>
+            Following              
+        </Link>
         {!toggleCollection && (
           <CreateCollection
             toggleCollection={toggleCollection}

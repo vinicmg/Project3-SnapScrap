@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../api/api";
 import HandleEditCollection from "../components/HandleEditCollection/handleEditCollection";
 import { AuthContext } from "../contexts/authContext";
+import unliked from '../../src/assets/unliked.png'
+import liked from '../../src/assets/liked.png'
 
 function CollectionsDetail() {
   const [isLoading, setIsLoading] = useState(true);
@@ -84,6 +86,33 @@ function CollectionsDetail() {
     }
   }
 
+  function handlePhotoClick(photo) {
+    if (photo.likes.includes(loggedUser.user._id)) {
+      handleRemoveLikePhoto(photo._id)
+      return
+    }
+
+    handleAddLikePhoto(photo._id)
+  }
+
+  async function handleAddLikePhoto(photoId) {
+    try {    
+      await api.put(`/photos/add-like/${photoId}`)
+      setReload(!reload)
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
+  async function handleRemoveLikePhoto(photoId) {
+    try {
+      await api.put(`/photos/remove-like/${photoId}`)
+      setReload(!reload)
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
       {!isLoading && (
@@ -144,7 +173,12 @@ function CollectionsDetail() {
             {coll.photos.map((photo) => {
               return (
                 <div key={photo._id} className="btnDivShow">
-                  <img src={photo.photoUrl} alt="Avatar" width={300} />
+                  <img src={photo.photoUrl} alt="Avatar" width={300}/>
+                  <img 
+                    src={photo.likes.includes(loggedUser.user._id) ? liked : unliked} 
+                    onClick={() => handlePhotoClick(photo)}
+                    width={25}
+                  />
                   {coll.author._id === loggedUser.user._id && (
                     <button
                       className="btnHidden"
